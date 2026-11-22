@@ -310,6 +310,33 @@ footer .lockup{--s:16px}
 .totop svg{width:20px;height:20px}
 @media (prefers-reduced-motion:reduce){.totop{transition:none}}
 @media print{.totop{display:none}}
+
+/* ONDI mascot */
+.ondi{background:var(--paper);border-block:1px solid var(--line)}
+.ondi-top{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:48px;align-items:center}
+.ondi-stage{background:#FFF9EF;border:1px solid var(--line);border-radius:24px;padding:24px;display:grid;place-items:center;position:relative}
+.ondi-stage svg{width:78%;height:auto}
+.bubble{position:absolute;left:18px;top:18px;background:#3A2A20;color:#FFF9EF;font-size:.9rem;font-weight:600;padding:8px 14px;border-radius:16px 16px 16px 4px}
+.ondi-copy{display:grid;gap:16px;min-width:0}
+.ondi-copy h2 span{font-family:var(--f-logo);color:var(--accent-text);letter-spacing:.04em}
+.ondi-facts{display:grid;grid-template-columns:auto 1fr;gap:8px 20px;margin:0;font-size:.95rem}
+.ondi-facts dt{font-weight:700;white-space:nowrap}
+.ondi-facts dd{margin:0;color:var(--ink-2)}
+.poses{margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.pose{background:var(--bg);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:grid;align-content:start}
+.pose .pic{background:#FFF9EF;display:grid;place-items:center;padding:14px;border-bottom:1px solid var(--line)}
+.pose .pic svg{width:100%;max-width:170px;height:auto}
+.pose .txt{padding:14px 16px 18px;display:grid;gap:4px}
+.pose .k{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;color:var(--accent-text);text-transform:uppercase}
+.pose h3{font-size:1.05rem}
+.pose p{font-size:.88rem;color:var(--ink-2)}
+.pose .say{font-size:.86rem;background:var(--tint);border-radius:10px;padding:8px 10px;color:var(--ink);margin-top:4px}
+.mini-ondi{width:92px;height:auto;flex:none}
+.req-intro .mini-ondi{width:110px}
+.ct-hello{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.ct-hello .say{background:var(--tint);border-radius:16px 16px 16px 4px;padding:10px 16px;font-weight:600}
+@media (max-width:900px){.ondi-top{grid-template-columns:1fr}.ondi-stage{max-width:380px}.poses{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.poses{grid-template-columns:1fr 1fr;gap:8px}.pose .txt{padding:12px}}
 </style>
 </head>
 <body>
@@ -323,6 +350,7 @@ footer .lockup{--s:16px}
       <li><a class="l" href="#assessment">진단·코칭</a></li>
       <li><a class="l" href="#mission">미션·비전</a></li>
       <li><a class="l" href="#values">핵심가치</a></li>
+      <li><a class="l" href="#ondi">온디</a></li>
       <li><a class="l" href="#talent">인재상</a></li>
       <li><a class="l" href="#brand">로고·심볼</a></li>
       <li><a class="l" href="#contact">문의</a></li>
@@ -372,7 +400,7 @@ footer .lockup{--s:16px}
     <div class="head">
       <div class="eyebrow">Business · 사업 영역</div>
       <h2>두 가지 방식으로 온도를 바꿉니다</h2>
-      <p class="lead">컨설팅은 데이터와 제도로 조직의 구조를 바꾸고, 코칭은 리더 한 사람의 변화로 조직의 온도를 바꿉니다. 두 사업은 같은 에르메스 주황을 쓰고, 바탕색으로 구분합니다.</p>
+      <p class="lead">컨설팅은 데이터와 제도로 조직의 구조를 바꾸고, 코칭은 리더 한 사람의 변화로 조직의 온도를 바꿉니다. 두 사업은 같은 온도 오렌지을 쓰고, 바탕색으로 구분합니다.</p>
     </div>
     <div class="lines">
       <article class="line" style="--lb:#1E2540;--lb2:#2A3357">
@@ -385,7 +413,7 @@ footer .lockup{--s:16px}
           <div><b>PMI 자문</b><span>Day 1~100 인력·문화 통합, 핵심인재 유지</span></div>
           <div><b>실행·정착 지원</b><span>실행 PMO, 분기 온도 리포트, 역량 이전</span></div>
         </div>
-        <div class="line-color"><i style="background:linear-gradient(90deg,#1E2540 0 50%,#F37021 50%)"></i>네이비 #1E2540 + 에르메스 주황 #F37021</div>
+        <div class="line-color"><i style="background:linear-gradient(90deg,#1E2540 0 50%,#F37021 50%)"></i>네이비 #1E2540 + 온도 오렌지 #F37021</div>
       </article>
       <article class="line" style="--lb:#3A2A20;--lb2:#4A382C">
         <div class="line-top"><span id="lgCoach"></span><span class="line-k">COACHING · 성장</span></div>
@@ -397,7 +425,7 @@ footer .lockup{--s:16px}
           <div><b>팀 코칭</b><span>팀의 합의, 신뢰, 일하는 방식</span></div>
           <div><b>PMI 전환 코칭</b><span>통합 조직 리더의 첫 100일</span></div>
         </div>
-        <div class="line-color"><i style="background:linear-gradient(90deg,#3A2A20 0 50%,#F37021 50%)"></i>에스프레소 #3A2A20 + 에르메스 주황 #F37021</div>
+        <div class="line-color"><i style="background:linear-gradient(90deg,#3A2A20 0 50%,#F37021 50%)"></i>에스프레소 #3A2A20 + 온도 오렌지 #F37021</div>
       </article>
     </div>
   </div>
@@ -463,6 +491,7 @@ footer .lockup{--s:16px}
 
     <div class="req" id="request">
       <div class="req-intro">
+        <div class="mini-ondi" data-ondi="listen" role="img" aria-label="온도계를 든 온디"></div>
         <div class="eyebrow">Request · 진단 의뢰</div>
         <h3>진단을 의뢰하시겠어요?</h3>
         <p>아래 항목을 채워 보내주시면 ONDO°로 바로 접수됩니다. 영업일 기준 2일 안에 적어주신 연락처로 답장드립니다.</p>
@@ -537,6 +566,26 @@ footer .lockup{--s:16px}
   </div>
 </section>
 
+<section class="ondi" id="ondi">
+  <div class="in">
+    <div class="ondi-top">
+      <div class="ondi-stage"><span class="bubble">지금 몇 도예요?</span><div id="ondiHero" role="img" aria-label="손을 흔드는 온디"></div></div>
+      <div class="ondi-copy">
+        <div class="eyebrow">Mascot · 마스코트</div>
+        <h2>안녕, 나는 <span>온디</span>야.</h2>
+        <p class="lead">온디(ONDI)는 ONDO°의 마스코트입니다. 머리 위의 주황 고리는 ONDO 로고의 다이얼이고, 볼이 주황으로 물들면 조직의 온도가 올라갔다는 뜻입니다. 차갑게 재고, 따뜻하게 데우는 작은 동료입니다.</p>
+        <dl class="ondi-facts">
+          <dt>이름</dt><dd>온디 ONDI = 온도 + 사람(ㅣ)</dd>
+          <dt>하는 일</dt><dd>조직의 온도를 듣고, 재고, 데우는 일</dd>
+          <dt>좋아하는 것</dt><dd>따뜻한 커피, 끝까지 듣기, 숫자로 확인하기</dd>
+          <dt>말버릇</dt><dd>“지금 몇 도예요?” · “같이 1도만 올려봐요.”</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="poses" id="poseGrid"></div>
+  </div>
+</section>
+
 <section class="talent" id="talent">
   <div class="in">
     <div class="head">
@@ -559,13 +608,13 @@ footer .lockup{--s:16px}
     <div class="head">
       <div class="eyebrow">Logo &amp; Symbol · 로고와 심볼</div>
       <h2>온도계 다이얼에서 시작했습니다</h2>
-      <p class="lead">심볼은 온도계의 다이얼입니다. 에르메스 주황 고리가 가운데의 사람을 감싸고, 아래는 열어 두었습니다. 워드마크에서는 이 고리가 ONDO의 첫 글자 O가 됩니다. 그라데이션 없이 단색으로 씁니다.</p>
+      <p class="lead">심볼은 온도계의 다이얼입니다. 온도 오렌지 고리가 가운데의 사람을 감싸고, 아래는 열어 두었습니다. 워드마크에서는 이 고리가 ONDO의 첫 글자 O가 됩니다. 그라데이션 없이 단색으로 씁니다.</p>
     </div>
     <div class="anat">
       <figure id="anat" aria-label="심볼 구조도"></figure>
       <ol class="keys">
         <li><span class="n">1</span><div><b>다이얼 고리 = 측정 · 전문성</b><span>온도계 다이얼에서 왔습니다. 감이 아니라 재고 판단합니다. 진단 데이터와 근거로 일합니다.</span></div></li>
-        <li><span class="n">2</span><div><b>주황 = 열정 · 온기</b><span>에르메스 주황 한 색으로 칠한 고리는 차가운 조직을 일하기 좋은 온도까지 데우는 열정입니다.</span></div></li>
+        <li><span class="n">2</span><div><b>주황 = 열정 · 온기</b><span>온도 오렌지 한 색으로 칠한 고리는 차가운 조직을 일하기 좋은 온도까지 데우는 열정입니다.</span></div></li>
         <li><span class="n">3</span><div><b>열린 아래 = 성장</b><span>닫히지 않은 고리는 계속 자랄 여지입니다. 조직도, 우리도 멈추지 않고 자랍니다.</span></div></li>
         <li><span class="n">4</span><div><b>중심점 = 사람 · 따뜻함</b><span>고리는 가운데의 사람을 감쌉니다. 제도보다 사람의 경험이 먼저입니다.</span></div></li>
         <li><span class="n">5</span><div><b>작은 동그라미 = 온도(°)</b><span>워드마크 끝의 작은 주황 동그라미는 온도의 단위 ‘도’입니다.</span></div></li>
@@ -590,7 +639,7 @@ footer .lockup{--s:16px}
         <div><span class="c" style="background:#EADFCB"></span><b>샌드 · 5%</b><code>#EADFCB</code><span>남은 눈금, 구분선</span></div>
         <div><span class="c" style="background:#3A2A20"></span><b>에스프레소 · 13%</b><code>#3A2A20</code><span>코칭 사업, 글자</span></div>
         <div><span class="c" style="background:#1E2540"></span><b>네이비 · 12%</b><code>#1E2540</code><span>컨설팅 사업</span></div>
-        <div><span class="c" style="background:#F37021"></span><b>주황 · 10%</b><code>#F37021</code><span>다이얼, 핵심 숫자</span></div>
+        <div><span class="c" style="background:#F37021"></span><b>온도 오렌지 · 10%</b><code>#F37021</code><span>다이얼, 핵심 숫자</span></div>
       </div>
     </div>
   </div>
@@ -603,6 +652,7 @@ footer .lockup{--s:16px}
       <h2>조직의 온도, 함께 재 볼까요?</h2>
       <p class="lead">진단, 인사 제도 설계, PMI 자문, 리더십 코칭, 버크만·MBTI 진단 의뢰에 관한 문의를 기다립니다. 메일로 회사 상황을 간단히 알려주시면 영업일 기준 2일 안에 답장드립니다.</p>
     </div>
+    <div class="ct-hello"><div class="mini-ondi" data-ondi="hello" role="img" aria-label="인사하는 온디"></div><p class="say">“반가워요, 같이 1도만 올려봐요.”</p></div>
     <div class="ct-grid">
       <div class="ct"><span class="k">Email</span><b id="ctMail">ondo.peoplelab@gmail.com</b><button type="button" class="cp" id="cpMail" data-v="ondo.peoplelab@gmail.com">주소 복사</button></div>
       <div class="ct"><span class="k">Website</span><b>ondopeople.com</b><a class="cp" href="https://ondopeople.com" target="_blank" rel="noopener">사이트 열기</a></div>
@@ -724,8 +774,8 @@ document.getElementById('coachTraits').innerHTML=ICF.map(d=>`<p class="dom">${d.
 // logo variants
 document.getElementById('logos').innerHTML=[
   {bg:C.bg,h:lockup('light',26),c:'Wordmark · 기본'},
-  {bg:C.navy,h:lockup('dark',24),c:'Consulting · 네이비 + 에르메스 주황'},
-  {bg:C.cold,h:lockup('dark',24),c:'Coaching · 에스프레소 + 에르메스 주황'},
+  {bg:C.navy,h:lockup('dark',24),c:'Consulting · 네이비 + 온도 오렌지'},
+  {bg:C.cold,h:lockup('dark',24),c:'Coaching · 에스프레소 + 온도 오렌지'},
   {bg:C.hot,h:sym({ring:'#fff',dot:C.cold}),c:'Symbol · 프로필, 앱 아이콘'}
 ].map(x=>`<figure><div class="tile" style="background:${x.bg}">${x.h}</div><figcaption>${x.c}</figcaption></figure>`).join('');
 
@@ -804,6 +854,43 @@ document.fonts.ready.then(()=>setTimeout(alignO,50));
 // back to top
 (function(){const b=document.getElementById('toTop');const u=()=>b.classList.toggle('on',scrollY>600);addEventListener('scroll',u,{passive:true});u();
 b.addEventListener('click',()=>{scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});document.querySelector('.brand-mini').focus({preventScroll:true})});})();
+
+// ONDI mascot (from the ONDI mascot guide)
+const M={ink:'#3A2A20',hot:'#F37021',ivory:'#FFF9EF'};
+function mascot(pose='hello'){
+  const P={hello:{eyes:'dot',mouth:'smile',arms:'wave',blush:.45,prop:''},
+           listen:{eyes:'look',mouth:'o',arms:'ear',blush:.35,prop:'thermo'},
+           warm:{eyes:'happy',mouth:'smile',arms:'hold',blush:.8,prop:'mug'},
+           cheer:{eyes:'happy',mouth:'big',arms:'up',blush:.6,prop:'spark'}}[pose];
+  const k=M.ink, st=`stroke="${k}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"`;
+  const ring=`<path d="M37.75 161.6 A76 76 0 1 1 162.25 161.6" fill="none" stroke="${M.hot}" stroke-width="14" stroke-linecap="round"/>`;
+  const feet=`<ellipse cx="80" cy="188" rx="15" ry="8" fill="${k}"/><ellipse cx="120" cy="188" rx="15" ry="8" fill="${k}"/>`;
+  const body=`<ellipse cx="100" cy="132" rx="60" ry="56" fill="${M.ivory}" stroke="${k}" stroke-width="6"/>`;
+  const eyes={dot:`<circle cx="81" cy="124" r="5.5" fill="${k}"/><circle cx="119" cy="124" r="5.5" fill="${k}"/>`,
+    look:`<circle cx="83" cy="120" r="5.5" fill="${k}"/><circle cx="121" cy="120" r="5.5" fill="${k}"/>`,
+    happy:`<path d="M74 126 Q81 116 88 126" ${st}/><path d="M112 126 Q119 116 126 126" ${st}/>`}[P.eyes];
+  const mouth={smile:`<path d="M92 141 Q100 149 108 141" ${st}/>`,
+    o:`<ellipse cx="100" cy="143" rx="4.5" ry="5.5" fill="none" stroke="${k}" stroke-width="4"/>`,
+    big:`<path d="M89 139 Q100 141 111 139 Q109 154 100 154 Q91 154 89 139 Z" fill="${k}"/><path d="M94 149 Q100 146 106 149" stroke="${M.hot}" stroke-width="3" fill="none" stroke-linecap="round"/>`}[P.mouth];
+  const cheeks=`<ellipse cx="68" cy="139" rx="9" ry="5.5" fill="${M.hot}" opacity="${P.blush}"/><ellipse cx="132" cy="139" rx="9" ry="5.5" fill="${M.hot}" opacity="${P.blush}"/>`;
+  const arms={wave:`<path d="M44 152 Q30 160 30 174" ${st}/><path d="M157 140 Q182 132 186 106" ${st}/>`,
+    ear:`<path d="M44 152 Q30 160 30 174" ${st}/><path d="M157 142 Q176 146 172 128" ${st}/>`,
+    hold:`<path d="M46 146 Q62 166 80 162" ${st}/><path d="M154 146 Q138 166 120 162" ${st}/>`,
+    up:`<path d="M44 134 Q22 118 20 92" ${st}/><path d="M156 134 Q178 118 180 92" ${st}/>`}[P.arms];
+  const prop={'':'',
+    thermo:`<g transform="translate(178 116) rotate(14)"><rect x="-6" y="-34" width="12" height="40" rx="6" fill="${M.ivory}" stroke="${k}" stroke-width="4"/><rect x="-2" y="-14" width="4" height="22" rx="2" fill="${M.hot}"/><circle cx="0" cy="12" r="9" fill="${M.hot}" stroke="${k}" stroke-width="4"/></g>`,
+    mug:`<rect x="82" y="150" width="36" height="30" rx="7" fill="${M.hot}" stroke="${k}" stroke-width="4"/><path d="M118 158 q10 0 10 8 q0 8 -10 8" fill="none" stroke="${k}" stroke-width="4"/><path d="M93 147 q-3 -4 0 -8 M107 147 q-3 -4 0 -8" fill="none" stroke="${M.hot}" stroke-width="3.5" stroke-linecap="round"/>`,
+    spark:[[14,52],[188,48],[100,8],[196,170],[6,168]].map(([x,y])=>`<path d="M${x} ${y-9} L${x+2.5} ${y-2.5} L${x+9} ${y} L${x+2.5} ${y+2.5} L${x} ${y+9} L${x-2.5} ${y+2.5} L${x-9} ${y} L${x-2.5} ${y-2.5} Z" fill="${M.hot}"/>`).join('')}[P.prop];
+  return `<svg viewBox="0 0 200 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${ring}${feet}${body}${cheeks}${eyes}${mouth}${P.prop==='mug'?arms+prop:prop+arms}</svg>`;
+}
+document.getElementById('ondiHero').innerHTML=mascot('hello');
+document.querySelectorAll('[data-ondi]').forEach(el=>el.innerHTML=mascot(el.dataset.ondi));
+document.getElementById('poseGrid').innerHTML=[
+ ['hello','안녕','Hello · 인사','처음 만나는 자리에서 먼저 인사를 건넵니다.','“반가워요, 지금 몇 도예요?”'],
+ ['listen','경청','Measure · 재다','온도계를 들고 끝까지 듣습니다. 진단과 리포트.','“숫자부터 같이 볼게요.”'],
+ ['warm','데움','Warm · 데우다','따뜻한 머그를 건넵니다. 코칭과 1on1.','“1도만 같이 올려봐요.”'],
+ ['cheer','축하','Keep · 지키다','올라간 온도를 함께 축하하고 지킵니다.','“이만큼 따뜻해졌어요!”']
+].map(([id,ko,en,d,sy])=>`<article class="pose"><div class="pic" role="img" aria-label="${ko} 포즈의 온디">${mascot(id)}</div><div class="txt"><span class="k">${en}</span><h3>${ko}</h3><p>${d}</p><p class="say">${sy}</p></div></article>`).join('');
 </script>
 </body>
 </html>
