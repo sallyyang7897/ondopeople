@@ -304,6 +304,12 @@ footer .lockup{--s:16px}
 .tm{font-size:.8rem;color:var(--ink-2);margin-top:20px}
 @media (max-width:900px){.progs{grid-template-columns:1fr}.req{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}.flow li:nth-child(3){padding-left:0;border-left:0}.flow li:nth-child(n+3){border-top:1px solid var(--line)}}
 @media (max-width:600px){.tools,.req form{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow li,.flow li + li{padding:16px 0;border-left:0}.flow li + li{border-top:1px solid var(--line)}.req{padding:24px 18px}}
+.totop{position:fixed;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:35;width:48px;height:48px;border-radius:50%;border:0;background:var(--accent);color:#fff;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 14px rgba(58,42,32,.22);opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .2s,transform .2s}
+.totop.on{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{filter:brightness(1.06)}
+.totop svg{width:20px;height:20px}
+@media (prefers-reduced-motion:reduce){.totop{transition:none}}
+@media print{.totop{display:none}}
 </style>
 </head>
 <body>
@@ -604,6 +610,7 @@ footer .lockup{--s:16px}
   </div>
 </section>
 
+<button type="button" class="totop" id="toTop" aria-label="맨 위로 가기" title="맨 위로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <footer>
   <div class="in">
     <div id="footLogo"></div>
@@ -794,6 +801,9 @@ document.fonts.ready.then(()=>setTimeout(alignO,50));
     const fb=()=>{const r=document.createRange();r.selectNodeContents(pre);const sel=getSelection();sel.removeAllRanges();sel.addRange(r);show('내용을 선택했습니다. 복사해서 쓰세요')};
     try{navigator.clipboard.writeText(pre.textContent).then(()=>show('의뢰 내용을 복사했습니다'),fb)}catch(_){fb()}});
 })();
+// back to top
+(function(){const b=document.getElementById('toTop');const u=()=>b.classList.toggle('on',scrollY>600);addEventListener('scroll',u,{passive:true});u();
+b.addEventListener('click',()=>{scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});document.querySelector('.brand-mini').focus({preventScroll:true})});})();
 </script>
 </body>
 </html>
