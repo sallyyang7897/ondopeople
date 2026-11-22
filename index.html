@@ -293,6 +293,14 @@ footer .lockup{--s:16px}
 .out{grid-column:1/-1;display:grid;gap:10px}
 .out pre{margin:0;white-space:pre-wrap;font:400 .88rem/1.6 var(--f-body);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;max-height:280px;overflow:auto}
 .out .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.req form{position:relative}
+.agree{display:flex;gap:8px;align-items:center;font-weight:600}
+.agree input{accent-color:var(--accent);width:18px;height:18px;margin:0}
+.fine{font-size:.8rem;color:var(--ink-2)}
+.status{grid-column:1/-1;font-size:.95rem;font-weight:600;padding:12px 16px;border-radius:10px;background:var(--paper);border:1px solid var(--line)}
+.status.ok{border-color:var(--accent);color:var(--ink)}
+.status.err{color:var(--accent-text)}
+.btn:disabled{opacity:.6;cursor:wait}
 .tm{font-size:.8rem;color:var(--ink-2);margin-top:20px}
 @media (max-width:900px){.progs{grid-template-columns:1fr}.req{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}.flow li:nth-child(3){padding-left:0;border-left:0}.flow li:nth-child(n+3){border-top:1px solid var(--line)}}
 @media (max-width:600px){.tools,.req form{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow li,.flow li + li{padding:16px 0;border-left:0}.flow li + li{border-top:1px solid var(--line)}.req{padding:24px 18px}}
@@ -451,7 +459,7 @@ footer .lockup{--s:16px}
       <div class="req-intro">
         <div class="eyebrow">Request · 진단 의뢰</div>
         <h3>진단을 의뢰하시겠어요?</h3>
-        <p>아래 항목을 채우면 의뢰 메일 내용이 만들어집니다. 복사해서 <b>ondo.peoplelab@gmail.com</b>으로 보내주세요. 영업일 기준 2일 안에 답장드립니다.</p>
+        <p>아래 항목을 채워 보내주시면 ONDO°로 바로 접수됩니다. 영업일 기준 2일 안에 적어주신 연락처로 답장드립니다.</p>
         <p>개인 한 분부터 팀, 회사 단위까지 의뢰받습니다.</p>
       </div>
       <form id="reqForm" novalidate>
@@ -470,12 +478,16 @@ footer .lockup{--s:16px}
           <label><input type="checkbox" name="prog" id="p2" value="팀빌딩 워크숍">팀빌딩 워크숍</label>
           <label><input type="checkbox" name="prog" id="p3" value="진단 기반 코칭">진단 기반 코칭</label></div></fieldset>
         <div class="f"><label for="org">회사·기관명</label><input type="text" id="org" placeholder="개인이면 비워 두세요"></div>
-        <div class="f"><label for="nm">성함</label><input type="text" id="nm" placeholder="홍길동"></div>
-        <div class="f"><label for="ct">연락처</label><input type="text" id="ct" placeholder="이메일 또는 전화번호"></div>
+        <div class="f"><label for="nm">성함 (필수)</label><input type="text" id="nm" placeholder="홍길동"></div>
+        <div class="f"><label for="ct">연락처 (필수)</label><input type="text" id="ct" placeholder="이메일 또는 전화번호"></div>
         <div class="f"><label for="cnt">참여 인원</label><input type="number" id="cnt" min="1" value="1"></div>
         <div class="f w"><label for="when">희망 시기</label><input type="text" id="when" placeholder="예: 2027년 1월 중순"></div>
         <div class="f w"><label for="msg">궁금한 점이나 상황</label><textarea id="msg" placeholder="진단을 받으려는 이유, 팀 상황 등을 편하게 적어주세요."></textarea></div>
-        <button class="btn" type="submit">의뢰 메일 만들기</button>
+        <div class="f w consent"><label class="agree"><input type="checkbox" id="agree"> 개인정보 수집·이용에 동의합니다 (필수)</label>
+          <p class="fine">수집 항목: 성함, 연락처, 회사·기관명 · 목적: 진단 의뢰 상담과 회신 · 보유 기간: 상담 종료 후 1년. 동의하지 않으시면 의뢰를 접수할 수 없습니다.</p></div>
+        <input type="text" id="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <button class="btn" type="submit" id="sendBtn">의뢰 보내기</button>
+        <p class="status" id="status" role="status" hidden></p>
         <div class="out" id="out" hidden>
           <pre id="outText"></pre>
           <div class="row"><button type="button" class="btn" id="cpReq">내용 복사</button><a class="btn ghost" id="mailReq" href="#">메일 앱으로 열기</a></div>
@@ -753,18 +765,31 @@ document.fonts.ready.then(()=>setTimeout(alignO,50));
     try{navigator.clipboard.writeText(v).then(ok,fb)}catch(_){fb()}});
 })();
 
-// assessment request
+// assessment request: sends to ONDO mailbox via FormSubmit
 (function(){
-  const f=document.getElementById('reqForm'),out=document.getElementById('out'),pre=document.getElementById('outText'),mail='ondo.peoplelab@gmail.com';
+  const f=document.getElementById('reqForm'),out=document.getElementById('out'),pre=document.getElementById('outText'),st=document.getElementById('status'),btn=document.getElementById('sendBtn'),mail='ondo.peoplelab@gmail.com';
   const v=id=>document.getElementById(id).value.trim();
-  f.addEventListener('submit',e=>{e.preventDefault();
+  const say=(m,cls)=>{st.textContent=m;st.className='status '+cls;st.hidden=false;st.scrollIntoView({block:'nearest'})};
+  f.addEventListener('submit',async e=>{e.preventDefault();out.hidden=true;
+    if(!v('nm')||!v('ct')){say('성함과 연락처를 적어주세요.','err');return}
+    if(!document.getElementById('agree').checked){say('개인정보 수집·이용에 동의해 주세요.','err');return}
+    if(v('hp'))return;
     const kind=f.querySelector('input[name=kind]:checked').value,tool=f.querySelector('input[name=tool]:checked').value;
     const progs=[...f.querySelectorAll('input[name=prog]:checked')].map(x=>x.value);
-    const subj=`[진단 의뢰] ${v('org')||v('nm')||kind} · ${tool}`;
-    const body=['안녕하세요, ONDO° 진단 의뢰드립니다.','',`의뢰 유형: ${kind}`,`진단 도구: ${tool}`,`프로그램: ${progs.length?progs.join(', '):'상담 후 결정'}`,`회사·기관: ${v('org')||'-'}`,`성함: ${v('nm')||'-'}`,`연락처: ${v('ct')||'-'}`,`참여 인원: ${v('cnt')||'-'}명`,`희망 시기: ${v('when')||'-'}`,'',`내용: ${v('msg')||'-'}`].join('\n');
-    pre.textContent=`받는 사람: ${mail}\n제목: ${subj}\n\n${body}`;
-    document.getElementById('mailReq').href=`mailto:${mail}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
-    out.hidden=false;out.scrollIntoView({block:'nearest'});
+    const subj=`[진단 의뢰] ${v('org')||v('nm')} · ${tool}`;
+    const data={'의뢰 유형':kind,'진단 도구':tool,'프로그램':progs.length?progs.join(', '):'상담 후 결정','회사·기관':v('org')||'-','성함':v('nm'),'연락처':v('ct'),'참여 인원':(v('cnt')||'-')+'명','희망 시기':v('when')||'-','내용':v('msg')||'-'};
+    btn.disabled=true;btn.textContent='보내는 중…';
+    try{
+      const r=await fetch('https://formsubmit.co/ajax/'+mail,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({...data,_subject:subj,_template:'table',_captcha:'false'})});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok||String(j.success)==='false')throw new Error(j.message||r.status);
+      say('의뢰가 접수되었습니다. 영업일 기준 2일 안에 연락드리겠습니다.','ok');f.reset();
+    }catch(err){
+      const body=['안녕하세요, ONDO° 진단 의뢰드립니다.',''].concat(Object.entries(data).map(([k,x])=>k+': '+x)).join('\n');
+      pre.textContent=`받는 사람: ${mail}\n제목: ${subj}\n\n${body}`;
+      document.getElementById('mailReq').href=`mailto:${mail}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+      say('지금은 자동 접수가 되지 않았습니다. 아래 내용을 복사해 메일로 보내주세요.','err');out.hidden=false;
+    }finally{btn.disabled=false;btn.textContent='의뢰 보내기'}
   });
   const t=document.querySelector('.toast');
   document.getElementById('cpReq').addEventListener('click',()=>{const show=m=>{if(!t)return;t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1600)};
